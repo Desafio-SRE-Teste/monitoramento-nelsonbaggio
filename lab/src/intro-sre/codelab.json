@@ -1,0 +1,17 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-05-27T09:57:50-03:00",
+  "id": "intro-sre",
+  "duration": 0,
+  "title": "SRE Academy - Introdução ao SRE",
+  "summary": "",
+  "source": "guide/1-intro-sre.md",
+  "theme": "",
+  "status": null,
+  "category": null,
+  "tags": [],
+  "url": "intro-sre"
+}

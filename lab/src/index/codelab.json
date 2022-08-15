@@ -1,0 +1,17 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-05-27T14:26:03-03:00",
+  "id": "index",
+  "duration": 0,
+  "title": "SRE Academy",
+  "summary": "",
+  "source": "guide/0-index.md",
+  "theme": "",
+  "status": null,
+  "category": null,
+  "tags": [],
+  "url": "index"
+}

@@ -1,0 +1,17 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-05-27T14:26:03-03:00",
+  "id": "monitoring",
+  "duration": 0,
+  "title": "SRE Academy - Monitoramento",
+  "summary": "",
+  "source": "guide/4-monitoring.md",
+  "theme": "",
+  "status": null,
+  "category": null,
+  "tags": [],
+  "url": "monitoring"
+}

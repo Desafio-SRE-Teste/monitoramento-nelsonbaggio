@@ -1,0 +1,135 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>SRE Academy - Monitoramento</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="monitoring"
+                  title="SRE Academy - Monitoramento"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Monitoramento (Prometheus e Grafana)" duration="0">
+        <p>Deploy da stack de Monitoramento no Kubernetes.</p>
+<p>Acesse o diretório monitoring a partir do diretório do Helm.</p>
+<pre>cd robot-shop/K8s/monitoring
+</pre>
+<p>Crie o namespace monitoring.</p>
+<pre>kubectl create namespace monitoring
+</pre>
+<p>Crie o role prometheus para gerenciar o namespace monitoring.</p>
+<pre>kubectl create -f k8s-prometheus/clusterRole.yaml
+</pre>
+<p>Configuração do prometheus no cluster Kubernetes.</p>
+<pre>kubectl create -f k8s-prometheus/config-map.yaml
+</pre>
+<p>Crie o deployment do prometheus.</p>
+<pre>kubectl create -f k8s-prometheus/prometheus-deployment.yaml --namespace=monitoring
+</pre>
+<p>Crie o service do prometheus.</p>
+<pre>kubectl create -f k8s-prometheus/prometheus-service.yaml --namespace=monitoring
+</pre>
+<p>Aplique algumas métricas nos recursos do Kubernetes.</p>
+<pre>kubectl apply -f kube-state-metrics/
+</pre>
+<p>Crie os recursos do Grafana</p>
+<pre>kubectl create -f k8s-grafana/
+</pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Logging (Loki)" duration="0">
+        <p>Deploy da stack de Log no Kubernetes.</p>
+<p>Adicione o repositório do Grafana ao Helm.</p>
+<pre>helm repo add grafana https://grafana.github.io/helm-charts
+</pre>
+<p>Instale o loki no namespace monitoring.</p>
+<pre>helm install loki grafana/loki-stack --namespace monitoring --create-namespace --set grafana.enabled=true
+</pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Usabilidade Rancher Desktop" duration="0">
+        <p>Clique no ícone do Rancher Desktop na bandeja do sistema e selecione &#34;Dashboard&#34;.</p>
+<p class="image-container"><img alt="Mostrando o menu do Rancher Desktop na bandeja do sistema" title="Menu do Rancher Desktop na bandeja do sistema" src="img/492c466a85d09f29.png"><img alt="Mostrando a tela de Dashboard do Rancher Desktop" title="Tela de Dashboard do Rancher Desktop" src="img/503ad07a128889e0.png"></p>
+<p>Selecione, no menu lateral esquerdo, &#34;Workload&#34; e &#34;Pods&#34; para visualizar os Pods em execução.</p>
+<p class="image-container"><img alt="Visualizando os Pods na janela de Dashboard no Rancher Desktop" title="Dashboard &gt; Workload &gt; Pods" src="img/a710ee94d1351722.png"></p>
+<p>Caso algum dos Pods não tenha sido inicializado corretamente, vá na linha do Pod com problema e no canto direito da janela clique nos três pontos verticais e selecione &#34;Delete&#34;.</p>
+<p class="image-container"><img alt="Demonstrando como deletar um Pod pelo Rancher Desktop" title="Deletando o Pod do Grafana" src="img/62435913e0cdaedd.png"></p>
+<p>Confirme a deleção. Logo após o Service Discovery irá iniciar outro Pod baseado na mesma imagem. Caso o problema persistir, execute o comando <code>kubectl logs -f &#123;&#123;POD_ID}} -n robot-shop</code> e altere <code>&#123;&#123;POD_ID}}</code> pelo nome do Pod, encontrado na coluna &#34;Name&#34; no &#34;Dashboard&#34; do Rancher. O log deve auxiliar na correção do problema.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Grafana" duration="0">
+        <p>Configuração do Grafana.</p>
+<p>Clique no ícone do Rancher Desktop que se encontra na bandeja do sistema e selecione &#34;Preferences&#34;.</p>
+<p class="image-container"><img alt="Selecionando Preferences na bandeja do sistema no menu do rancher-desktop" title="Menu do Rancher Desktop na bandeja do sistema" src="img/ba6c49123657c533.png"></p>
+<p>Selecione &#34;Port Forwarding&#34; no menu lateral esquerdo.</p>
+<p class="image-container"><img alt="Selecionando Port Forwarding no menu lateral esquerdo do rancher-desktop" title="Rancher Desktop &gt; Preferences &gt; Port Forwarding" src="img/c96b2d331f4fe03f.png"></p>
+<p>Clique em &#34;Forward&#34; nos serviços &#34;grafana&#34;, &#34;prometheus-service&#34; e &#34;web&#34;. Será gerada uma porta, na coluna &#34;Local Port&#34;, para que você acesse os serviços localmente em seu navegador.</p>
+<p class="image-container"><img alt="Habilitando o redirecionamento por uma porta local no rancher-desktop" title="Habilitando redirecionamento" src="img/82796a3a70206ed9.png"></p>
+<p>Acesse o Grafana em seu navegador, na porta que você acabou de gerar, com o endereço <code>localhost:&#123;&#123;Local Port}}</code>.</p>
+<p>Faça login com o usuário <code>admin</code> e senha <code>admin</code>. Logo após, defina uma nova senha. <strong>Obs.:</strong> Será necessário redefinir a senha toda vez que você deletar o pod do Grafana.</p>
+<p class="image-container"><img alt="Acessando o Grafana pelo navegador" title="Login Grafana" src="img/601c126ffef8b8ce.png"></p>
+<p>No menu lateral esquerdo, vá no ícone da engrenagem e selecione &#34;Data sources&#34;.</p>
+<p class="image-container"><img alt="Menu lateral esquerdo com a opção Configuration expandida e Data sources destacado" title="Data sources" src="img/d0c96e0fd479f2b5.png"></p>
+<p>Selecione &#34;Add data source&#34;.</p>
+<p class="image-container"><img alt="Página dos Data sources onde está listado o prometheus" title="Data sources Grafana" src="img/d4ef166008b7b9fa.png"></p>
+<p>Selecione &#34;Loki&#34;.</p>
+<p class="image-container"><img alt="Lista com possíveis Data sources para serem adicionados" title="Lista Data sources" src="img/9f00409b7a5c7a0a.png"></p>
+<p>Configure o Loki alterando sua URL para <code>http://loki.monitoring:3100</code>.</p>
+<p class="image-container"><img alt="Página com as configurações do Loki - Alterando a URL" title="Configuração Loki" src="img/41806e0eecbc5ded.png"></p>
+<p>Clique em &#34;Save &amp; test&#34; no final da página.</p>
+<p class="image-container"><img alt="Página com as configurações do Loki - Save &amp; test" title="Configuração Loki" src="img/9a743dd083b9f3bf.png"></p>
+<p>No menu lateral esquerdo, vá no ícone de &#34;mais&#34;/&#34;adição&#34; (+) e selecione &#34;Import&#34;.</p>
+<p class="image-container"><img alt="Menu lateral esquerdo com a opção Create expandida e Import destacado" title="Import" src="img/77a27fd92ed7d58b.png"></p>
+<p>Digite &#34;12740&#34; em &#34;Import via grafana.com&#34; e clique em &#34;Load&#34; para importar o dashboard do Kubernetes.</p>
+<p class="image-container"><img alt="Importando o dashboard Kubernetes através de seu ID 12740" title="Importando dashboard Kubernetes" src="img/328fdc24a716c489.png"></p>
+<p>Selecione o seu data source do Prometheus e clique em &#34;Import&#34; no final da página.</p>
+<p class="image-container"><img alt="Página de configuração na importação do dashboard Kubernetes" title="Importando dashboard Kubernetes" src="img/1c6d2501cb6ae836.png"></p>
+<ul>
+<li>Novamente no menu lateral esquerdo, no ícone de &#34;mais&#34;/&#34;adição&#34; (+), selecione &#34;Import&#34;.</li>
+<li>Digite &#34;12019&#34; em &#34;Import via grafana.com&#34; e clique em &#34;Load&#34; para importar o Loki.</li>
+<li>Selecione os seus data sources do Loki e Prometheus e clique em &#34;Import&#34;.</li>
+</ul>
+<h2 is-upgraded>Dashboard Robot Shop</h2>
+<ul>
+<li>Copie todo o conteúdo do arquivo <a href="https://bitbucket.org/ciandt_it/sre-academy/src/main/robot-shop/dashboards/robot-shop-dashboard.json" target="_blank">robot-shop-dashboard.json</a></li>
+<li>No Grafana, no menu lateral esquerdo, vá no ícone de &#34;mais&#34;/&#34;adição&#34; (+) e selecione &#34;Import&#34;.</li>
+<li>Cole o conteúdo do arquivo .json na caixa de texto abaixo de &#34;Import via panel json&#34; e clique em &#34;Load&#34;</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

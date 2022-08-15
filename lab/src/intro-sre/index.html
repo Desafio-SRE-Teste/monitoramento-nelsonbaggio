@@ -1,0 +1,105 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>SRE Academy - Introdução ao SRE</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="intro-sre"
+                  title="SRE Academy - Introdução ao SRE"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="O que é SRE?" duration="0">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rhoncus arcu egestas eleifend elementum. In pulvinar leo est, nec finibus massa gravida ac. Vestibulum vestibulum feugiat facilisis. Suspendisse pellentesque arcu vel nisi congue laoreet. In et vestibulum turpis. Morbi vitae elementum purus, vitae pretium purus. Morbi sollicitudin mi tellus, nec dignissim lacus porttitor sed. Pellentesque sit amet viverra ipsum. Etiam sit amet massa lectus. Nunc lectus ex, mollis non lobortis ut, dictum nec sem. Fusce quis elementum turpis, a venenatis nulla. Sed et erat ut quam tempor tristique. Nunc posuere sapien in lacus feugiat, eget finibus neque sagittis. Praesent suscipit accumsan velit et consectetur. Suspendisse ut finibus turpis.</p>
+<p>Proin volutpat gravida sapien quis pretium. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vel rutrum neque. Suspendisse potenti. Pellentesque in pharetra ante. Aliquam maximus, tortor quis fringilla mollis, orci ipsum pulvinar ligula, in blandit magna ligula eu odio. Nam rhoncus sed libero sit amet feugiat.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Práticas SRE" duration="0">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rhoncus arcu egestas eleifend elementum. In pulvinar leo est, nec finibus massa gravida ac. Vestibulum vestibulum feugiat facilisis. Suspendisse pellentesque arcu vel nisi congue laoreet. In et vestibulum turpis. Morbi vitae elementum purus, vitae pretium purus. Morbi sollicitudin mi tellus, nec dignissim lacus porttitor sed. Pellentesque sit amet viverra ipsum. Etiam sit amet massa lectus. Nunc lectus ex, mollis non lobortis ut, dictum nec sem. Fusce quis elementum turpis, a venenatis nulla. Sed et erat ut quam tempor tristique. Nunc posuere sapien in lacus feugiat, eget finibus neque sagittis. Praesent suscipit accumsan velit et consectetur. Suspendisse ut finibus turpis.</p>
+<p>Proin volutpat gravida sapien quis pretium. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vel rutrum neque. Suspendisse potenti. Pellentesque in pharetra ante. Aliquam maximus, tortor quis fringilla mollis, orci ipsum pulvinar ligula, in blandit magna ligula eu odio. Nam rhoncus sed libero sit amet feugiat.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Monitoring" duration="0">
+        <p>Without monitoring, you have no way to tell whether the service is even working; absent a thoughtfully designed monitoring infrastructure, you&#39;re flying blind. Maybe everyone who tries to use the website gets an error, maybe not—but you want to be aware of problems before your users notice them. We discuss tools and philosophy in Practical Alerting from Time-Series Data.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Incident Response" duration="0">
+        <p>SREs don&#39;t go on-call merely for the sake of it: rather, on-call support is a tool we use to achieve our larger mission and remain in touch with how distributed computing systems actually work (and fail!). If we could find a way to relieve ourselves of carrying a pager, we would. In Being On-Call, we explain how we balance on-call duties with our other responsibilities.</p>
+<p>Once you&#39;re aware that there is a problem, how do you make it go away? That doesn&#39;t necessarily mean fixing it once and for all—maybe you can stop the bleeding by reducing the system&#39;s precision or turning off some features temporarily, allowing it to gracefully degrade, or maybe you can direct traffic to another instance of the service that&#39;s working properly. The details of the solution you choose to implement are necessarily specific to your service and your organization. Responding effectively to incidents, however, is something applicable to all teams.</p>
+<p>Figuring out what&#39;s wrong is the first step; we offer a structured approach in Effective Troubleshooting.</p>
+<p>During an incident, it&#39;s often tempting to give in to adrenalin and start responding ad hoc. We advise against this temptation in Emergency Response, and counsel in Managing Incidents, that managing incidents effectively should reduce their impact and limit outage-induced anxiety.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Postmortem and Root-Cause Analysis" duration="0">
+        <p>We aim to be alerted on and manually solve only new and exciting problems presented by our service; it&#39;s woefully boring to &#34;fix&#34; the same issue over and over. In fact, this mindset is one of the key differentiators between the SRE philosophy and some more traditional operations-focused environments. This theme is explored in two chapters.</p>
+<p>Building a blameless postmortem culture is the first step in understanding what went wrong (and what went right!), as described in Postmortem Culture: Learning from Failure.</p>
+<p>Related to that discussion, in Tracking Outages, we briefly describe an internal tool, the outage tracker, that allows SRE teams to keep track of recent production incidents, their causes, and actions taken in response to them.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Testing" duration="0">
+        <p>Once we understand what tends to go wrong, our next step is attempting to prevent it, because an ounce of prevention is worth a pound of cure. Test suites offer some assurance that our software isn&#39;t making certain classes of errors before it&#39;s released to production; we talk about how best to use these in Testing for Reliability.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Capacity Planning" duration="0">
+        <p>In Software Engineering in SRE, we offer a case study of software engineering in SRE with Auxon, a tool for automating capacity planning.</p>
+<p>Naturally following capacity planning, load balancing ensures we&#39;re properly using the capacity we&#39;ve built. We discuss how requests to our services get sent to datacenters in Load Balancing at the Frontend. Then we continue the discussion in Load Balancing in the Datacenter and Handling Overload, both of which are essential for ensuring service reliability.</p>
+<p>Finally, in Addressing Cascading Failures, we offer advice for addressing cascading failures, both in system design and should your service be caught in a cascading failure.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Development" duration="0">
+        <p>One of the key aspects of Google&#39;s approach to Site Reliability Engineering is that we do significant large-scale system design and software engineering work within the organization.</p>
+<p>In Managing Critical State: Distributed Consensus for Reliability, we explain distributed consensus, which (in the guise of Paxos) is at the core of many of Google&#39;s distributed systems, including our globally distributed Cron system. In Distributed Periodic Scheduling with Cron, we outline a system that scales to whole datacenters and beyond, which is no easy task.</p>
+<p>Data Processing Pipelines, discusses the various forms that data processing pipelines can take: from one-shot MapReduce jobs running periodically to systems that operate in near real-time. Different architectures can lead to surprising and counterintuitive challenges.</p>
+<p>Making sure that the data you stored is still there when you want to read it is the heart of data integrity; in Data Integrity: What You Read Is What You Wrote, we explain how to keep data safe.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Product" duration="0">
+        <p>Finally, having made our way up the reliability pyramid, we find ourselves at the point of having a workable product. In Reliable Product Launches at Scale, we write about how Google does reliable product launches at scale to try to give users the best possible experience starting from Day Zero.</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

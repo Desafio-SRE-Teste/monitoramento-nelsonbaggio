@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user
+  labels:
+    service: user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: user
+  template:
+    metadata:
+      labels:
+        service: user
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port:   '8080'  
+    spec:
+      {{ if .Values.psp.enabled }}
+      serviceAccountName: robot-shop
+      {{ end }}
+      containers:
+      - name: user
+        image: {{ .Values.ciandt.image.repo }}/rs-user:{{ .Values.image.version }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+          # agent networking access
+          - name: INSTANA_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 50m
+            memory: 50Mi
+      restartPolicy: Always

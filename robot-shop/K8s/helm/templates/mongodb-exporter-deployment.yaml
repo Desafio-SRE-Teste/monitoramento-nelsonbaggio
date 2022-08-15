@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-exporter
+  labels:
+    service: mongodb-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: mongodb-exporter
+  template:
+    metadata:
+      labels:
+        service: mongodb-exporter
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port:   '9216' 
+    spec:
+      {{ if .Values.psp.enabled }}
+      serviceAccountName: robot-shop
+      {{ end }}
+      containers:
+      - name: mongodb-exporter
+        image: ssheehy/mongodb-exporter
+        ports:
+        - containerPort: 9216
+          name: exporter
+        env:
+          - name: "MONGODB_URI"
+            value: "mongodb://mongodb:27017/"
+        resources:
+          limits:
+            cpu: 100m
+            memory: 50Mi
+          requests:
+            cpu: 50m
+            memory: 25Mi
+      restartPolicy: Always
+

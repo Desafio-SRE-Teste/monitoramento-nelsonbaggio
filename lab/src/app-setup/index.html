@@ -1,0 +1,115 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>SRE Academy - Configuração da Aplicação (Robot Shop)</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="app-setup"
+                  title="SRE Academy - Configuração da Aplicação (Robot Shop)"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Aplicação base" duration="0">
+        <h2 is-upgraded>Robot Shop</h2>
+<p>Para a visualização das principais métricas de confiabilidade defendidas por práticas de SRE, utilizaremos o benchmark do Stan&#39;s Robot Shop.</p>
+<p><a href="https://github.com/instana/robot-shop/" target="_blank">Stan&#39;s Robot Shop</a></p>
+<p class="image-container"><img alt="Tela inicial" title="Tela inicial" src="img/7a4ff3d2c7365b68.png"></p>
+<p>A aplicação consiste em um e-commerce de robôs, e por meio dela será possível monitorar os serviços utilizados desde a visualização da lista de robôs disponíveis para venda e adição no carrinho de compras até o checkout e geração do pedido.</p>
+<h2 is-upgraded>Diagrama de Arquitetura</h2>
+<p class="image-container"><img alt="Diagrama de Arquitetura" title="Diagrama de Arquitetura" src="img/a00a051ab3c0ef6d.png"></p>
+<h3 is-upgraded>Tecnologias</h3>
+<ul>
+<li><a href="https://angularjs.org/" target="_blank">AngularJS (1.x)</a></li>
+<li><a href="https://go.dev/" target="_blank">Golang</a></li>
+<li><a href="https://www.java.com/pt-BR/" target="_blank">Java</a> (<a href="https://spring.io/" target="_blank">Spring Boot</a>)</li>
+<li><a href="https://www.mongodb.com/" target="_blank">MongoDB</a></li>
+<li><a href="https://www.mysql.com/" target="_blank">MySQL</a> (<a href="https://www.maxmind.com/en/home" target="_blank">Maxmind</a> data)</li>
+<li><a href="https://www.nginx.com/" target="_blank">Nginx</a></li>
+<li><a href="https://nodejs.org/en/" target="_blank">NodeJS</a> (<a href="https://expressjs.com/" target="_blank">Express</a>)</li>
+<li><a href="https://www.php.net/" target="_blank">PHP</a> (<a href="https://httpd.apache.org/" target="_blank">Apache</a>)</li>
+<li><a href="https://www.python.org/" target="_blank">Python</a> (<a href="https://flask.palletsprojects.com/en/2.1.x/" target="_blank">Flask</a> e <a href="https://locust.io/" target="_blank">Locust</a>)</li>
+<li><a href="https://www.rabbitmq.com/" target="_blank">RabbitMQ</a></li>
+<li><a href="https://redis.io/" target="_blank">Redis</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Instalação do Rancher Desktop" duration="0">
+        <h2 is-upgraded>Linux</h2>
+<p>Faremos a instalação via pacote .deb.</p>
+<p>Faça o download da chave GPG do Rancher.</p>
+<pre>curl -s https://download.opensuse.org/repositories/isv:/Rancher:/stable/deb/Release.key | gpg --dearmor | sudo dd status=none of=/usr/share/keyrings/isv--rancher-stable-archive-keyring.gpg
+</pre>
+<p>Adicione o repositório do Rancher à lista dos repositórios disponíveis no seu sistema.</p>
+<pre>echo &#39;deb [signed-by=/usr/share/keyrings/isv--rancher-stable-archive-keyring.gpg] https://download.opensuse.org/repositories/isv:/Rancher:/stable/deb/ ./&#39; | sudo dd status=none of=/etc/apt/sources.list.d/isv-rancher-stable.list
+</pre>
+<p>Atualize a lista de pacotes do seu sistema.</p>
+<pre>sudo apt update
+</pre>
+<p>Instale o Rancher Desktop.</p>
+<pre>sudo apt install rancher-desktop
+</pre>
+<h2 is-upgraded>Windows</h2>
+<p>Acesse <a href="https://rancherdesktop.io/" target="_blank">https://rancherdesktop.io/</a> e baixe o instalador para Windows.</p>
+<p>Execute o instalador e aceite o acordo de licença.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Configuração do Rancher Desktop" duration="0">
+        <p>Abra o Rancher desktop.</p>
+<p class="image-container"><img alt="Menu de busca procurando pelo Rancher Desktop" title="Buscando o rancher nas aplicações do sistema" src="img/5eb99088a8aa8806.png"></p>
+<p>Na tela de boas-vindas, verifique se está selecionada a versão &#34;stable&#34; do Kubernetes, &#34;containerd&#34; e &#34;Automatic&#34; e clique em Accept.</p>
+<p><strong>Obs.:</strong> No <strong>Windows</strong>, selecione &#34;dockerd (moby)&#34; como <em>Container Runtime</em>.</p>
+<p class="image-container"><img alt="Tela de configuração do Rancher Desktop" title="Configurando o Rancher Desktop" src="img/6931713cb06b5b56.png"></p>
+<p>O Kubernetes (<a href="https://k3s.io/" target="_blank">K3s</a>) será instalado. Você pode acompanhar o progresso no canto inferior esquerdo da janela do Rancher.</p>
+<p class="image-container"><img alt="Tela de configuração do Rancher Desktop" title="Configurando o Rancher Desktop" src="img/969e173a052a2ecb.png"></p>
+<p>Verifique a bandeja do seu sistema (system tray) se o ícone do Rancher Desktop está presente.</p>
+<p class="image-container"><img alt="Mostrando a bandeja do sistema com o ícone do Rancher Desktop" title="Bandeja do sistema" src="img/f2d125aef4a00faa.png"></p>
+<p>Clique no ícone do Rancher Desktop e verifique em Kubernetes Contexts se o rancher-desktop está selecionado.</p>
+<p class="image-container"><img alt="Alterando o Kubernetes Contexts na bandeja do sistema para rancher-desktop" title="Menu do Rancher Desktop na bandeja do sistema" src="img/ded8d86933153a74.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Helm" duration="0">
+        <p>Instalação da aplicação no Kubernetes via Helm.</p>
+<p>Crie o namespace robot-shop no Kubernetes.</p>
+<pre>kubectl create ns robot-shop
+</pre>
+<p>Instale a aplicação.</p>
+<pre>helm install robot-shop --create-namespace -n robot-shop robot-shop/K8s/helm/
+</pre>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
